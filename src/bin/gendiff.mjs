@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 
 import program from 'commander';
-// import ver from '../../package.json';
+import { createRequire } from 'module';
+import genDiff from '../index';
 
-program.description('Compares two configuration files and shows a difference.')
-  .version('1.1.0')
+const require = createRequire(import.meta.url);
+
+const pack = require('../../package.json');
+
+program.description(pack.description)
+  .version(pack.version)
   .arguments('<firstConfig> <secondConfig>')
   .option('-f, --format [type]', 'output format')
-  .action();
+  .action(genDiff());
 
 program.parse(process.argv);
