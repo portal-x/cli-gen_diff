@@ -1,12 +1,11 @@
 install:
-		npm install
+		install-deps
 
-start:
-		npx babel-node src/index.js
+install-deps:
+		npm ci
 
-build:
-		rm -rf dist
-		npm run build
+run:
+		## index.js
 
 publish:
 		npm publish --dry-run

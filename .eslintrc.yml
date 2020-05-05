@@ -1,14 +1,11 @@
 ---
 
 plugins:
-  - babel
   - jest
 
 env:
   node: true
-  jest: true
-
-parser: babel-eslint
+  ## jest: true
 
 extends:
   - 'eslint:recommended'
@@ -17,5 +14,6 @@ extends:
 
 rules:
   no-console: 0
+  import/extensions: 0 
 
 

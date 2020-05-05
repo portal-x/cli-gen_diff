@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 import program from 'commander';
-import { createRequire } from 'module';
-import genDiff from '../index';
+import fs from 'fs';
+import genDiff from '../index.js';
 
-const require = createRequire(import.meta.url);
+const pac = fs.readFileSync('./package.json', (data) => data).toString();
+const pack = JSON.parse(pac);
 
-const pack = require('../../package.json');
 
 program.description(pack.description)
   .version(pack.version)
@@ -14,4 +14,7 @@ program.description(pack.description)
   .option('-f, --format [type]', 'output format')
   .action(genDiff());
 
+
 program.parse(process.argv);
+
+console.log(process.cwd());
