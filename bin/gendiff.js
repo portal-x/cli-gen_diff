@@ -12,9 +12,7 @@ program.description(pack.description)
   .version(pack.version)
   .arguments('<firstConfig> <secondConfig>')
   .option('-f, --format [type]', 'output format')
-  .action(genDiff());
+  .action((firstConfig, secondConfig) => console.log(genDiff(firstConfig, secondConfig)));
 
 
 program.parse(process.argv);
-
-console.log(process.cwd());
