@@ -7,7 +7,7 @@ node_js:
 
 env:
   global:
-    - CC_TEST_REPORTER_ID=<313684225ed0b91f8c2eb92c7e47955c5341fb7e9fc8d5817f87b669d3f98ef2>
+    - CC_TEST_REPORTER_ID=313684225ed0b91f8c2eb92c7e47955c5341fb7e9fc8d5817f87b669d3f98ef2
 
 
 before_script:
