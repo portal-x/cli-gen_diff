@@ -1,7 +1,7 @@
 import gendiff from '../index';
 
-const beforePath = './__tests__/before.json';
-const afterPath = './__tests__/after.json';
+const beforePath = './__fixtures__/before.json';
+const afterPath = './__fixtures__/after.json';
 
 test('json comparison', () => {
   expect(gendiff(beforePath, afterPath))

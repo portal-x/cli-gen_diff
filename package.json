@@ -22,7 +22,8 @@
     "url": "https://github.com/portal-x/backend-project-lvl2/issues"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "transform": {}
   },
   "homepage": "https://github.com/portal-x/backend-project-lvl2#readme",
   "devDependencies": {
