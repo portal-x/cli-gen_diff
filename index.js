@@ -1,11 +1,9 @@
 import _ from 'lodash';
-import fs from 'fs';
+import getObjectFromJson from './src/utils.js';
 
 const genDiff = (pathToFile1, pathToFile2) => {
-  const beforeJson = fs.readFileSync(pathToFile1, (data) => data).toString();
-  const afterJson = fs.readFileSync(pathToFile2, (data) => data).toString();
-  const before = JSON.parse(beforeJson);
-  const after = JSON.parse(afterJson);
+  const before = getObjectFromJson(pathToFile1);
+  const after = getObjectFromJson(pathToFile2);
   const allValues = [...Object.entries(before), ...Object.entries(after)]
     .sort()
     .map(([key, value]) => {
@@ -21,6 +19,5 @@ const genDiff = (pathToFile1, pathToFile2) => {
 
   return `{\n  ${allValues.join('\n  ')}\n}`;
 };
-// console.log(genDiff('../../forRemove/1.json', '../../forRemove/2.json'));
 
 export default genDiff;
