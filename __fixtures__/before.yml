@@ -1,0 +1,7 @@
+host: google.com
+
+timeout: 70
+
+proxy: 8.8.4.4
+
+follow: true
