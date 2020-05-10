@@ -10,4 +10,5 @@ test('read JSON', () => {
     proxy: '8.8.4.4',
     follow: true,
   });
+  expect(getAndParseData('./__fixtures__/after.ini')).toEqual({ timeout: 20, verbose: true, host: 'hexlet.io' });
 });
