@@ -5,10 +5,12 @@ The package can be used as CLI utility or Node.js package that can be used in yo
 
 gendiff supports file extensions such as json, yaml, yml, ini.
 
+
 [![Build Status](https://travis-ci.org/portal-x/backend-project-lvl2.svg?branch=master)](https://travis-ci.org/portal-x/backend-project-lvl2)
 [![Maintainability](https://api.codeclimate.com/v1/badges/413a2f24806cbc5270d3/maintainability)](https://codeclimate.com/github/portal-x/backend-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/413a2f24806cbc5270d3/test_coverage)](https://codeclimate.com/github/portal-x/backend-project-lvl2/test_coverage)
 
+[![asciicast](https://asciinema.org/a/Dzqt1tRx7HbIxbgug1gRK6rgy.svg)](https://asciinema.org/a/Dzqt1tRx7HbIxbgug1gRK6rgy)
 [![asciicast](https://asciinema.org/a/ONHRxftuhPFNoiG4COiVs9Dyx.svg)](https://asciinema.org/a/ONHRxftuhPFNoiG4COiVs9Dyx)
 
 [![asciicast](https://asciinema.org/a/MhrL7IBgGzgaN9fSH9QVtKntf.svg)](https://asciinema.org/a/MhrL7IBgGzgaN9fSH9QVtKntf)
@@ -29,13 +31,14 @@ $ npm install gendiff
 
 ## API
 
-gendiff supports file extensions such as json, yaml, yml, ini.
+gendiff supports file extensions such as json, yaml, yml, ini. By default output format 'toString'.
+
 For example:
 
 ```sh
 import gendiff from 'gendiff'
 
-const diff = gendiff('./forExample/before.json', '/user/documents/after.json');
+const diff = gendiff('./forExample/before.json', '/user/documents/after.json', 'toString');
 
 console.log(diff);
 ```

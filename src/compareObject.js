@@ -1,21 +1,39 @@
 import _ from 'lodash';
 
-export default (object1, object2) => {
-  if (_.isEqual(object1, {}) && _.isEqual(object2, {})) {
-    return '';
+const diff = (objectBefore, objectAfter) => {
+  if (_.isEqual(objectBefore, {}) && _.isEqual(objectAfter, {})) {
+    return [];
   }
-  const allValues = [...Object.entries(object1), ...Object.entries(object2)]
-    .sort()
-    .map(([key, value]) => {
-      if (_.has(object1, key) && _.has(object2, key) && object1[key] === object2[key]) {
-        return `  ${key}: ${value}`;
-      }
-      if (_.has(object1, key) && object1[key] === value) {
-        return `- ${key}: ${value}`;
-      }
-      return `+ ${key}: ${value}`;
-    })
-    .filter((item, index, arr) => arr.indexOf(item) === index);
-
-  return `{\n  ${allValues.join('\n  ')}\n}`;
+  const keys = _.union(
+    Object.keys(objectBefore), Object.keys(objectAfter),
+  ).sort();
+  const tree = keys.reduce((acc, key) => {
+    if (_.has(objectBefore, key) && !_.has(objectAfter, key)) {
+      acc.push({ key, value: objectBefore[key], type: 'removed' });
+      return acc;
+    }
+    if (!_.has(objectBefore, key) && _.has(objectAfter, key)) {
+      acc.push({ key, value: objectAfter[key], type: 'added' });
+      return acc;
+    }
+    if (_.isObject(objectBefore[key]) && _.isObject(objectAfter[key])) {
+      acc.push({
+        key,
+        descendants: diff(objectBefore[key], objectAfter[key]),
+        type: 'processed',
+      });
+      return acc;
+    }
+    if (objectBefore[key] === objectAfter[key]) {
+      acc.push({ key, value: objectAfter[key], type: 'unchanged' });
+      return acc;
+    }
+    acc.push({
+      key, value: objectBefore[key], newValue: objectAfter[key], type: 'changed',
+    });
+    return acc;
+  }, []);
+  return tree;
 };
+
+export default diff;
