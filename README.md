@@ -3,8 +3,19 @@
 gendiff compares two configuration files and shows difference.
 The package can be used as CLI utility or Node.js package that can be used in your project.
 
-gendiff supports file extensions such as json, yaml, yml, ini.
+gendiff supports file extensions such as json, yaml, yml, ini. It can output the result in 'stylish' and 'plain' formats. You can select it by flag -f (--format) By default output format 'stylish'.
 
+For example:
+
+```
+$ gendiff --format plain project/configurations/before.json project/configurations/after.json
+```
+
+or
+
+```
+$ gendiff project/configurations/before.ini project/configurations/after.ini
+```
 
 [![Build Status](https://travis-ci.org/portal-x/backend-project-lvl2.svg?branch=master)](https://travis-ci.org/portal-x/backend-project-lvl2)
 [![Maintainability](https://api.codeclimate.com/v1/badges/413a2f24806cbc5270d3/maintainability)](https://codeclimate.com/github/portal-x/backend-project-lvl2/maintainability)
@@ -31,14 +42,14 @@ $ npm install gendiff
 
 ## API
 
-gendiff supports file extensions such as json, yaml, yml, ini. By default output format 'toString'.
+gendiff supports file extensions such as json, yaml, yml, ini. It can output the result in 'stylish' and 'plain' formats. By default output format 'stylish'.
 
 For example:
 
 ```sh
 import gendiff from 'gendiff'
 
-const diff = gendiff('./forExample/before.json', '/user/documents/after.json', 'toString');
+const diff = gendiff('./forExample/before.json', '/user/documents/after.json', 'plain');
 
 console.log(diff);
 ```
