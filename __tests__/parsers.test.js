@@ -13,7 +13,7 @@ const resultJson = {
 
 test('read JSON', () => {
   expect(getAndParseData('')).toEqual({});
-  expect(getAndParseData('./__fixtures__/deepBefore.json')).toEqual(resultJson);
+  expect(getAndParseData('./__fixtures__/before.json')).toEqual(resultJson);
   expect(getAndParseData('./__fixtures__/after.yaml')).toEqual({ timeout: 30, verbose: false, host: 'google.com' });
   expect(getAndParseData('./__fixtures__/before.yml')).toEqual({
     host: 'google.com',

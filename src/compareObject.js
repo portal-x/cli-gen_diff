@@ -9,27 +9,27 @@ const diff = (objectBefore, objectAfter) => {
   ).sort();
   const tree = keys.reduce((acc, key) => {
     if (_.has(objectBefore, key) && !_.has(objectAfter, key)) {
-      acc.push({ key, value: objectBefore[key], type: 'removed' });
+      acc.push({ key, type: 'removed', value: objectBefore[key] });
       return acc;
     }
     if (!_.has(objectBefore, key) && _.has(objectAfter, key)) {
-      acc.push({ key, value: objectAfter[key], type: 'added' });
+      acc.push({ key, type: 'added', value: objectAfter[key] });
       return acc;
     }
     if (_.isObject(objectBefore[key]) && _.isObject(objectAfter[key])) {
       acc.push({
         key,
-        descendants: diff(objectBefore[key], objectAfter[key]),
         type: 'processed',
+        descendants: diff(objectBefore[key], objectAfter[key]),
       });
       return acc;
     }
     if (objectBefore[key] === objectAfter[key]) {
-      acc.push({ key, value: objectAfter[key], type: 'unchanged' });
+      acc.push({ key, type: 'unchanged', value: objectAfter[key] });
       return acc;
     }
     acc.push({
-      key, value: objectBefore[key], newValue: objectAfter[key], type: 'changed',
+      key, type: 'changed', value: objectBefore[key], newValue: objectAfter[key],
     });
     return acc;
   }, []);

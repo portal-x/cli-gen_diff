@@ -1,8 +1,8 @@
 import fs from 'fs';
 import gendiff from '../index';
 
-const beforeJson = './__fixtures__/deepBefore.json';
-const afterJson = './__fixtures__/deepAfter.json';
+const beforeJson = './__fixtures__/before.json';
+const afterJson = './__fixtures__/after.json';
 const beforeYaml = './__fixtures__/before.yml';
 const afterYaml = './__fixtures__/after.yaml';
 const beforeIni = './__fixtures__/before.ini';
@@ -17,6 +17,8 @@ test('json comparison', () => {
     .toEqual(fs.readFileSync('./__fixtures__/result.txt', 'utf-8'));
   expect(gendiff(beforeJson, afterJson, 'plain'))
     .toEqual(fs.readFileSync('./__fixtures__/plainResult.txt', 'utf-8'));
+  expect(gendiff(beforeJson, afterJson, 'json'))
+    .toEqual(fs.readFileSync('./__fixtures__/jsonResult.txt', 'utf-8'));
 
   expect(gendiff(beforeYaml, afterYaml))
     .toEqual('{\n  - follow: true\n    host: google.com\n  - proxy: 8.8.4.4\n  - timeout: 70\n  + timeout: 30\n  + verbose: false\n}');
