@@ -1,0 +1,8 @@
+{
+  - follow: true
+    host: google.com
+  - proxy: 8.8.4.4
+  - timeout: 70
+  + timeout: 30
+  + verbose: false
+}

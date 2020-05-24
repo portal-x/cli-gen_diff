@@ -1,28 +1,27 @@
 import fs from 'fs';
 import gendiff from '../index';
 
-const beforeJson = './__fixtures__/before.json';
-const afterJson = './__fixtures__/after.json';
-const beforeYaml = './__fixtures__/before.yml';
-const afterYaml = './__fixtures__/after.yaml';
-const beforeIni = './__fixtures__/before.ini';
-const afterIni = './__fixtures__/after.ini';
-const txt = './__fixtures__/result.txt';
+const path = './__tests__/__fixtures__/';
+const json = `${path}after.json`;
+const txt = `${path}result.txt`;
 
-test('json comparison', () => {
-  expect(gendiff('', '')).toEqual('');
-  expect(gendiff(txt, afterJson)).toEqual('unsupported format');
-
-  expect(gendiff(beforeJson, afterJson))
-    .toEqual(fs.readFileSync('./__fixtures__/result.txt', 'utf-8'));
-  expect(gendiff(beforeJson, afterJson, 'plain'))
-    .toEqual(fs.readFileSync('./__fixtures__/plainResult.txt', 'utf-8'));
-  expect(gendiff(beforeJson, afterJson, 'json'))
-    .toEqual(fs.readFileSync('./__fixtures__/jsonResult.txt', 'utf-8'));
-
-  expect(gendiff(beforeYaml, afterYaml))
-    .toEqual('{\n  - follow: true\n    host: google.com\n  - proxy: 8.8.4.4\n  - timeout: 70\n  + timeout: 30\n  + verbose: false\n}');
-
-  expect(gendiff(beforeIni, afterIni))
-    .toEqual('{\n  - follow: false\n    host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: true\n}');
+test('boundary cases', () => {
+  expect(gendiff('', '')).toEqual('nothing to compare');
+  expect(gendiff(txt, json)).toEqual('unsupported format');
 });
+
+test.each([
+  ['before.json', 'after.json', 'tree', 'result.txt'],
+  ['before.json', 'after.json', 'plain', 'plainResult.txt'],
+  ['before.json', 'after.json', 'json', 'jsonResult.txt'],
+  ['before.yml', 'after.yaml', 'tree', 'ymlResult.txt'],
+  ['before.ini', 'after.ini', 'tree', 'iniResult.txt'],
+])(
+  'compare %s and %s on %s format',
+  (pathToBefore, pathToAfter, format, pathExpect) => {
+    const before = `${path}${pathToBefore}`;
+    const after = `${path}${pathToAfter}`;
+    const expected = fs.readFileSync(`${path}${pathExpect}`, 'utf-8');
+    expect(gendiff(before, after, format)).toEqual(expected);
+  },
+);

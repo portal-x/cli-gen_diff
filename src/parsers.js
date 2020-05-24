@@ -1,19 +1,15 @@
-import fs from 'fs';
-import path from 'path';
 import yaml from 'js-yaml';
 import ini from 'ini';
 
-export default (pathToFile) => {
-  if (pathToFile === '') return {};
-  const format = path.extname(pathToFile);
-  const data = fs.readFileSync(pathToFile, 'utf-8');
-  if (format === '.json') {
+export default (data, extension) => {
+  if (data === '') return {};
+  if (extension === '.json') {
     return JSON.parse(data.toString());
   }
-  if (format === '.yaml' || format === '.yml') {
+  if (extension === '.yaml' || extension === '.yml') {
     return yaml.safeLoad(data);
   }
-  if (format === '.ini') {
+  if (extension === '.ini') {
     const list = Object.entries(ini.parse(data));
     return list.reduce((acc, [key, value]) => {
       const item = (+value && typeof value !== 'boolean') ? +value : value;
