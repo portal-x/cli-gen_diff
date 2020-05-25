@@ -26,8 +26,8 @@ const makePlain = (data) => {
       if (item.type === 'added') {
         return `${acc}\nProperty '${path}${item.key}' was added with value: ${v}`;
       }
-      if (item.type === 'processed') {
-        return `${acc}${format(item.descendants, `${path}${item.key}.`)}`;
+      if (item.type === 'node') {
+        return `${acc}${format(item.children, `${path}${item.key}.`)}`;
       }
 
       return `${acc}\nProperty '${path}${item.key}' was deleted`;

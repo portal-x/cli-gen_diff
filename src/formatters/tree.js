@@ -21,8 +21,8 @@ const makeStylish = (data) => {
     if (item.type === 'added') {
       return `${acc}\n${spaces}+ ${item.key}: ${v}`;
     }
-    if (item.type === 'processed') {
-      return `${acc}\n${spaces}  ${item.key}: {${makeFormat(item.descendants, depth + 4)}\n${spaces}  }`;
+    if (item.type === 'node') {
+      return `${acc}\n${spaces}  ${item.key}: {${makeFormat(item.children, depth + 4)}\n${spaces}  }`;
     }
 
     return `${acc}\n${spaces}- ${item.key}: ${v}`;

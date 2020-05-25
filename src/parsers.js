@@ -1,22 +1,27 @@
 import yaml from 'js-yaml';
 import ini from 'ini';
 
-export default (data, extension) => {
-  if (data === '') return {};
-  if (extension === '.json') {
-    return JSON.parse(data.toString());
-  }
-  if (extension === '.yaml' || extension === '.yml') {
-    return yaml.safeLoad(data);
-  }
-  if (extension === '.ini') {
-    const list = Object.entries(ini.parse(data));
-    return list.reduce((acc, [key, value]) => {
-      const item = (+value && typeof value !== 'boolean') ? +value : value;
-      acc[key] = item;
-      return acc;
-    }, {});
-  }
 
-  return 'unsupported format';
+const parseIni = (dataToParse) => {
+  const parsedIni = Object.entries(ini.parse(dataToParse));
+  const normalizedOutputType = parsedIni.reduce((acc, [key, value]) => {
+    const item = (+value && typeof value !== 'boolean') ? +value : value;
+    acc[key] = item;
+    return acc;
+  }, {});
+  return normalizedOutputType;
+};
+
+export default (data, extension) => {
+  switch (extension) {
+    case '.json':
+      return JSON.parse(data);
+    case ('.yaml'):
+      return yaml.safeLoad(data);
+    case ('.yml'):
+      return yaml.safeLoad(data);
+    case ('.ini'):
+      return parseIni(data);
+    default: return 'unsupported format';
+  }
 };
