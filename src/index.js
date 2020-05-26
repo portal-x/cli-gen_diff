@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 import parseData from './parsers.js';
-import getDiff from './getDiff.js';
+import buildTree from './buildTree.js';
 import selectFormat from './formatters/index.js';
 
 const getData = (pathToFile) => {
@@ -21,7 +21,7 @@ const genDiff = (pathToFile1, pathToFile2, format) => {
   if (before === 'unsupported format' || after === 'unsupported format') {
     return 'unsupported format';
   }
-  const diffList = getDiff(before, after);
+  const diffList = buildTree(before, after);
 
   return selectFormat(format)(diffList);
 };

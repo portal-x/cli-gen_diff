@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const getDiff = (objectBefore, objectAfter) => {
+const buildTree = (objectBefore, objectAfter) => {
   const keys = _.union(
     Object.keys(objectBefore), Object.keys(objectAfter),
   ).sort();
@@ -16,7 +16,7 @@ const getDiff = (objectBefore, objectAfter) => {
       return {
         key,
         type: 'node',
-        children: getDiff(objectBefore[key], objectAfter[key]),
+        children: buildTree(objectBefore[key], objectAfter[key]),
       };
     }
     if (objectBefore[key] === objectAfter[key]) {
@@ -30,4 +30,4 @@ const getDiff = (objectBefore, objectAfter) => {
   return tree;
 };
 
-export default getDiff;
+export default buildTree;
