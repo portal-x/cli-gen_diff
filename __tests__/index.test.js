@@ -2,23 +2,21 @@ import fs from 'fs';
 import gendiff from '../src/index';
 
 const path = './__tests__/__fixtures__/';
+const extensions = ['json', 'yaml', 'ini'];
+const formats = ['tree', 'plain', 'json'];
 
-test.each([
-  ['json', 'tree'],
-  ['json', 'plain'],
-  ['json', 'json'],
-  ['yaml', 'tree'],
-  ['yaml', 'plain'],
-  ['yaml', 'json'],
-  ['ini', 'tree'],
-  ['ini', 'plain'],
-  ['ini', 'json'],
-])(
+const dataForTests = (fileExtensions, outputFormats) => fileExtensions
+  .map((fileExtension) => outputFormats
+    .map((format) => {
+      const result = fs.readFileSync(`${path}${format}result.txt`, 'utf-8');
+      return [fileExtension, format, result];
+    })).flat();
+
+test.each(dataForTests(extensions, formats))(
   'compare %s on %s format',
-  (extension, outputFormat) => {
+  (extension, outputFormat, expected) => {
     const before = `${path}before.${extension}`;
     const after = `${path}after.${extension}`;
-    const expected = fs.readFileSync(`${path}${outputFormat}result.txt`, 'utf-8');
     expect(gendiff(before, after, outputFormat)).toEqual(expected);
   },
 );
