@@ -1,7 +1,15 @@
-host: google.com
+common:
+  setting1: Value 1
+  setting2: 200
+  setting3: true
+  setting6:
+    key: value
 
-timeout: 70
+group1:
+  baz: bas
+  foo: bar
+  nest:
+    key: value
 
-proxy: 8.8.4.4
-
-follow: true
+group2:
+  abc: 12345

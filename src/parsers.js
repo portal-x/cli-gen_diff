@@ -1,15 +1,19 @@
 import yaml from 'js-yaml';
 import ini from 'ini';
 
-
 const parseIni = (dataToParse) => {
-  const parsedIni = Object.entries(ini.parse(dataToParse));
-  const normalizedOutputType = parsedIni.reduce((acc, [key, value]) => {
-    const item = (+value && typeof value !== 'boolean') ? +value : value;
-    acc[key] = item;
-    return acc;
-  }, {});
-  return normalizedOutputType;
+  const parsedIni = ini.parse(dataToParse);
+  const normalizeIni = (dataToNormalize) => {
+    if (typeof (dataToNormalize) !== 'object') {
+      return (+dataToNormalize && typeof dataToNormalize !== 'boolean') ? +dataToNormalize : dataToNormalize;
+    }
+    return Object.entries(dataToNormalize).reduce((acc, [key, value]) => {
+      const item = normalizeIni(value);
+      acc[key] = item;
+      return acc;
+    }, {});
+  };
+  return normalizeIni(parsedIni);
 };
 
 export default (data, extension) => {

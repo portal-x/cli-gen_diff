@@ -18,9 +18,9 @@ const genDiff = (pathToFile1, pathToFile2, format) => {
   }
   const before = getData(pathToFile1);
   const after = getData(pathToFile2);
-  if (before === 'unsupported format' || after === 'unsupported format') {
-    return 'unsupported format';
-  }
+  // if (before === 'unsupported format' || after === 'unsupported format') {
+  //   return 'unsupported format';
+  // }
   const diffList = buildTree(before, after);
 
   return selectFormat(format)(diffList);
