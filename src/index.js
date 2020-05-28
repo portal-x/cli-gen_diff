@@ -13,14 +13,8 @@ const getData = (pathToFile) => {
 };
 
 const genDiff = (pathToFile1, pathToFile2, format) => {
-  if (pathToFile1 === '' || pathToFile2 === '') {
-    throw new Error('nothing to compare');
-  }
   const before = getData(pathToFile1);
   const after = getData(pathToFile2);
-  // if (before === 'unsupported format' || after === 'unsupported format') {
-  //   return 'unsupported format';
-  // }
   const diffList = buildTree(before, after);
 
   return selectFormat(format)(diffList);
