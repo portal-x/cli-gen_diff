@@ -6,8 +6,7 @@ const parseObjectToString = (data) => {
   return `${key}: ${value}`;
 };
 
-const makeStylish = (data) => {
-  if (data.length === 0) return '';
+export default (data) => {
   const makeFormat = (list, depth) => list.reduce((acc, item) => {
     const spaces = ' '.repeat(depth + 2);
     const v = _.isObject(item.value) ? `{\n${spaces}      ${parseObjectToString(item.value)}\n${spaces}  }` : item.value;
@@ -29,6 +28,3 @@ const makeStylish = (data) => {
   }, '');
   return `{${makeFormat(data, 0)}\n}`;
 };
-
-
-export default makeStylish;

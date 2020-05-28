@@ -3,15 +3,14 @@ import makePlain from './plain.js';
 import makeJson from './json.js';
 
 export default (format = 'tree') => {
-  if (format === 'tree') {
-    return makeTree;
+  switch (format) {
+    case 'tree':
+      return makeTree;
+    case 'plain':
+      return makePlain;
+    case 'json':
+      return makeJson;
+    default:
+      throw new Error(`Unknown format: '${format}'!`);
   }
-  if (format === 'plain') {
-    return makePlain;
-  }
-  if (format === 'json') {
-    return makeJson;
-  }
-
-  return 'unexpected output format';
 };

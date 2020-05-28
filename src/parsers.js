@@ -4,7 +4,7 @@ import ini from 'ini';
 const parseIni = (dataToParse) => {
   const parsedIni = ini.parse(dataToParse);
   const normalizeIni = (dataToNormalize) => {
-    if (typeof (dataToNormalize) !== 'object') {
+    if (dataToNormalize.constructor !== Object) {
       return (+dataToNormalize && typeof dataToNormalize !== 'boolean') ? +dataToNormalize : dataToNormalize;
     }
     return Object.entries(dataToNormalize).reduce((acc, [key, value]) => {
@@ -26,6 +26,6 @@ export default (data, extension) => {
       return yaml.safeLoad(data);
     case ('.ini'):
       return parseIni(data);
-    default: return 'unsupported format';
+    default: throw new Error(`Unknown format: '${extension}'!`);
   }
 };
