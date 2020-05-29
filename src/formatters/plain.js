@@ -1,30 +1,27 @@
 import _ from 'lodash';
 
-const makePlain = (data) => {
-  if (data.length === 0) return '';
+const normalizeValue = (data) => {
+  if (_.isObject(data)) {
+    return '[complex value]';
+  }
+  return _.isString(data) ? `'${data}'` : data;
+};
+
+const makePlain = (ast) => {
+  if (ast.length === 0) return '';
   const format = (list, path) => {
     if (list.length === 0) return '';
     const result = list.reduce((acc, item) => {
-      let v;
-      let newV;
-      if (_.isObject(item.value)) {
-        v = '[complex value]';
-      } else {
-        v = _.isString(item.value) ? `'${item.value}'` : item.value;
-      }
-      if (_.isObject(item.newValue)) {
-        newV = '[complex value]';
-      } else {
-        newV = _.isString(item.newValue) ? `'${item.newValue}'` : item.newValue;
-      }
+      const oldValue = normalizeValue(item.value);
+      const changedValue = normalizeValue(item.newValue);
       if (item.type === 'changed') {
-        return `${acc}\nProperty '${path}${item.key}' was changed from ${v} to ${newV}`;
+        return `${acc}\nProperty '${path}${item.key}' was changed from ${oldValue} to ${changedValue}`;
       }
       if (item.type === 'unchanged') {
         return `${acc}\nProperty '${path}${item.key}' was not changed`;
       }
       if (item.type === 'added') {
-        return `${acc}\nProperty '${path}${item.key}' was added with value: ${v}`;
+        return `${acc}\nProperty '${path}${item.key}' was added with value: ${oldValue}`;
       }
       if (item.type === 'node') {
         return `${acc}${format(item.children, `${path}${item.key}.`)}`;
@@ -36,7 +33,7 @@ const makePlain = (data) => {
     return result;
   };
 
-  return format(data, '').trim();
+  return format(ast, '').trim();
 };
 
 export default makePlain;
