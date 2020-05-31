@@ -8,26 +8,25 @@ const normalizeValue = (data) => {
 };
 
 const makePlain = (ast) => {
-  if (ast.length === 0) return '';
   const format = (list, path) => {
-    if (list.length === 0) return '';
     const result = list.reduce((acc, item) => {
-      const oldValue = normalizeValue(item.value);
-      const changedValue = normalizeValue(item.newValue);
+      const keyWithPath = `${path}${item.key}`;
+      const oldValue = normalizeValue(item.valueBefore);
+      const changedValue = normalizeValue(item.valueAfter);
       if (item.type === 'changed') {
-        return `${acc}\nProperty '${path}${item.key}' was changed from ${oldValue} to ${changedValue}`;
+        return `${acc}\nProperty '${keyWithPath}' was changed from ${oldValue} to ${changedValue}`;
       }
       if (item.type === 'unchanged') {
-        return `${acc}\nProperty '${path}${item.key}' was not changed`;
+        return `${acc}\nProperty '${keyWithPath}' was not changed`;
       }
       if (item.type === 'added') {
-        return `${acc}\nProperty '${path}${item.key}' was added with value: ${oldValue}`;
+        return `${acc}\nProperty '${keyWithPath}' was added with value: ${oldValue}`;
       }
       if (item.type === 'node') {
-        return `${acc}${format(item.children, `${path}${item.key}.`)}`;
+        return `${acc}${format(item.children, `${keyWithPath}.`)}`;
       }
 
-      return `${acc}\nProperty '${path}${item.key}' was deleted`;
+      return `${acc}\nProperty '${keyWithPath}' was deleted`;
     }, '');
 
     return result;

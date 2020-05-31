@@ -7,8 +7,8 @@ import selectFormat from './formatters/index.js';
 
 const getData = (pathToFile) => {
   const data = fs.readFileSync(pathToFile, 'utf-8');
-  const extension = path.extname(pathToFile);
-  const parsedData = parseData(data, extension);
+  const format = path.extname(pathToFile).slice(1);
+  const parsedData = parseData(data, format);
   return parsedData;
 };
 

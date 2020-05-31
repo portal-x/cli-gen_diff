@@ -7,10 +7,10 @@ const buildTree = (objectBefore, objectAfter) => {
 
   const tree = keys.map((key) => {
     if (_.has(objectBefore, key) && !_.has(objectAfter, key)) {
-      return { key, type: 'removed', value: objectBefore[key] };
+      return { key, type: 'removed', valueBefore: objectBefore[key] };
     }
     if (!_.has(objectBefore, key) && _.has(objectAfter, key)) {
-      return { key, type: 'added', value: objectAfter[key] };
+      return { key, type: 'added', valueBefore: objectAfter[key] };
     }
     if (_.isObject(objectBefore[key]) && _.isObject(objectAfter[key])) {
       return {
@@ -20,10 +20,10 @@ const buildTree = (objectBefore, objectAfter) => {
       };
     }
     if (objectBefore[key] === objectAfter[key]) {
-      return { key, type: 'unchanged', value: objectAfter[key] };
+      return { key, type: 'unchanged', valueBefore: objectAfter[key] };
     }
     return {
-      key, type: 'changed', value: objectBefore[key], newValue: objectAfter[key],
+      key, type: 'changed', valueBefore: objectBefore[key], valueAfter: objectAfter[key],
     };
   });
 

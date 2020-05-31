@@ -10,8 +10,8 @@ const makeFormat = (list, depth) => list.reduce((acc, item) => {
   const spaces = ' '.repeat(depth + 2);
   const baseSpaces = ' '.repeat(6);
   const ifNotChanged = ' '.repeat(2);
-  const oldValue = _.isObject(item.value) ? `{\n${spaces}${baseSpaces}${parseObjectToString(item.value)}\n${spaces}  }` : item.value;
-  const changedValue = _.isObject(item.newValue) ? `{\n${spaces}${baseSpaces}${parseObjectToString(item.newValue)}\n${spaces}  }` : item.newValue;
+  const oldValue = _.isObject(item.valueBefore) ? `{\n${spaces}${baseSpaces}${parseObjectToString(item.valueBefore)}\n${spaces}  }` : item.valueBefore;
+  const changedValue = _.isObject(item.valueAfter) ? `{\n${spaces}${baseSpaces}${parseObjectToString(item.valueAfter)}\n${spaces}  }` : item.valueAfter;
   if (item.type === 'changed') {
     return `${acc}\n${spaces}- ${item.key}: ${oldValue}\n${spaces}+ ${item.key}: ${changedValue}`;
   }
