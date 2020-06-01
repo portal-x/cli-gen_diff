@@ -24,7 +24,7 @@ $ gendiff project/configurations/before.ini project/configurations/after.ini
 [![asciicast](https://asciinema.org/a/wqiAl0MuWK2Ntixk9XQKkNS5D.svg)](https://asciinema.org/a/wqiAl0MuWK2Ntixk9XQKkNS5D)
 [![asciicast](https://asciinema.org/a/DjwYoe9T8EP9Zf9hEgxo28WOe.svg)](https://asciinema.org/a/DjwYoe9T8EP9Zf9hEgxo28WOe)
 [![asciicast](https://asciinema.org/a/ONHRxftuhPFNoiG4COiVs9Dyx.svg)](https://asciinema.org/a/ONHRxftuhPFNoiG4COiVs9Dyx)
-[![asciicast](https://asciinema.org/a/MhrL7IBgGzgaN9fSH9QVtKntf.svg)](https://asciinema.org/a/MhrL7IBgGzgaN9fSH9QVtKntf)
+[![asciicast](https://asciinema.org/a/PgTyYQfxYbEe7algKv3qUjt8m.svg)](https://asciinema.org/a/PgTyYQfxYbEe7algKv3qUjt8m)
 
 ## Setup
 
