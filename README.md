@@ -1,5 +1,9 @@
 # PROJECT 'Generate difference'
 
+[![Build Status](https://travis-ci.org/portal-x/backend-project-lvl2.svg?branch=master)](https://travis-ci.org/portal-x/backend-project-lvl2)
+[![Maintainability](https://api.codeclimate.com/v1/badges/413a2f24806cbc5270d3/maintainability)](https://codeclimate.com/github/portal-x/backend-project-lvl2/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/413a2f24806cbc5270d3/test_coverage)](https://codeclimate.com/github/portal-x/backend-project-lvl2/test_coverage)
+
 gendiff compares two configuration files and shows difference.
 The package can be used as CLI utility or Node.js package that can be used in your project.
 
@@ -16,10 +20,6 @@ or
 ```bash
 $ gendiff project/configurations/before.ini project/configurations/after.ini
 ```
-
-[![Build Status](https://travis-ci.org/portal-x/backend-project-lvl2.svg?branch=master)](https://travis-ci.org/portal-x/backend-project-lvl2)
-[![Maintainability](https://api.codeclimate.com/v1/badges/413a2f24806cbc5270d3/maintainability)](https://codeclimate.com/github/portal-x/backend-project-lvl2/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/413a2f24806cbc5270d3/test_coverage)](https://codeclimate.com/github/portal-x/backend-project-lvl2/test_coverage)
 
 [![asciicast](https://asciinema.org/a/wqiAl0MuWK2Ntixk9XQKkNS5D.svg)](https://asciinema.org/a/wqiAl0MuWK2Ntixk9XQKkNS5D)
 [![asciicast](https://asciinema.org/a/DjwYoe9T8EP9Zf9hEgxo28WOe.svg)](https://asciinema.org/a/DjwYoe9T8EP9Zf9hEgxo28WOe)
