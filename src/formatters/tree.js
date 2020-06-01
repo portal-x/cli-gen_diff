@@ -18,20 +18,20 @@ const makeFormat = (list, depth) => list.reduce((acc, item) => {
   const fill = ' '.repeat(2);
   const oldValue = getValue(item.valueBefore, depth);
   const changedValue = getValue(item.valueAfter, depth);
-  if (item.type === 'changed') {
-    return `${acc}\n${genSpaces(depth)}- ${item.key}: ${oldValue}\n${genSpaces(depth)}+ ${item.key}: ${changedValue}`;
+  switch (item.type) {
+    case 'changed':
+      return `${acc}\n${genSpaces(depth)}- ${item.key}: ${oldValue}\n${genSpaces(depth)}+ ${item.key}: ${changedValue}`;
+    case 'unchanged':
+      return `${acc}\n${genSpaces(depth)}${fill}${item.key}: ${oldValue}`;
+    case 'added':
+      return `${acc}\n${genSpaces(depth)}+ ${item.key}: ${oldValue}`;
+    case 'node':
+      return `${acc}\n${genSpaces(depth)}${fill}${item.key}: {${makeFormat(item.children, depth + 4)}\n${genSpaces(depth)}  }`;
+    case 'removed':
+      return `${acc}\n${genSpaces(depth)}- ${item.key}: ${oldValue}`;
+    default:
+      throw new Error(`Error! '${item.type}' is invalid`);
   }
-  if (item.type === 'unchanged') {
-    return `${acc}\n${genSpaces(depth)}${fill}${item.key}: ${oldValue}`;
-  }
-  if (item.type === 'added') {
-    return `${acc}\n${genSpaces(depth)}+ ${item.key}: ${oldValue}`;
-  }
-  if (item.type === 'node') {
-    return `${acc}\n${genSpaces(depth)}${fill}${item.key}: {${makeFormat(item.children, depth + 4)}\n${genSpaces(depth)}  }`;
-  }
-
-  return `${acc}\n${genSpaces(depth)}- ${item.key}: ${oldValue}`;
 }, '');
 
 export default (ast) => `{${makeFormat(ast, 0)}\n}`;
