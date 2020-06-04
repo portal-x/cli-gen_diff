@@ -6,10 +6,10 @@ const buildTree = (objectBefore, objectAfter) => {
   ).sort();
 
   const tree = keys.map((key) => {
-    if (_.has(objectBefore, key) && !_.has(objectAfter, key)) {
+    if (!_.has(objectAfter, key)) {
       return { key, type: 'removed', valueBefore: objectBefore[key] };
     }
-    if (!_.has(objectBefore, key) && _.has(objectAfter, key)) {
+    if (!_.has(objectBefore, key)) {
       return { key, type: 'added', valueBefore: objectAfter[key] };
     }
     if (_.isObject(objectBefore[key]) && _.isObject(objectAfter[key])) {
