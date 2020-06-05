@@ -37,7 +37,7 @@ $ npm link
 ## gendiff module for node.js
 
 ```sh
-$ npm install gendiff
+$ npm install cli-gen_diff
 ```
 
 ## API

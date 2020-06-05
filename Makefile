@@ -8,7 +8,7 @@ run:
 	bin/gendiff.js
 
 publish:
-	npm publish --dry-run
+	npm publish
 
 lint:
 	npx eslint .
