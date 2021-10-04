@@ -29,7 +29,7 @@ $ gendiff project/configurations/before.ini project/configurations/after.ini
 ## Setup
 
 ```sh
-$ git clone https://github.com/portal-x/backend-project-lvl2.git
+$ git clone https://github.com/portal-x/cli-gen_diff.git
 $ make install
 $ npm link
 ```
